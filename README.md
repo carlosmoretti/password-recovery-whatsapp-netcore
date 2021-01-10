@@ -1,4 +1,4 @@
-# Password Change with .NET Core 3.1 WebAPI, DDD, DI, Repository Pattern, Migrations and Exception Handling. 
+# Password Change with .NET Core 3.1 WebAPI, DDD, DI, Repository Pattern, Migrations and Exception Handling, Bcrypt
 This structure can be use as scaffold.
 
 # How to configure Twilio!
