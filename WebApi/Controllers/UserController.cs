@@ -39,7 +39,6 @@ namespace WebApi.Controllers
         {
             if (!Regex.Match(user.Password, "^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})").Success)
             {
-                throw new Exception();
                 throw new GenericException("Sua senha não está segura o suficiente.");
             }
 
@@ -78,13 +77,14 @@ namespace WebApi.Controllers
         [HttpPost("TrocarSenha")]
         public void TrocarSenha([FromBody] TrocarSenhaDto req)
         {
-            req.Senha = BCrypt.Net.BCrypt.HashPassword(req.Senha);
             var todosItens = _passwordChangeRegistryRepository.GetAll();
 
             if (!Regex.Match(req.Senha, "^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})").Success)
             {
                 throw new GenericException("Sua senha não está segura o suficiente.");
             }
+
+            req.Senha = BCrypt.Net.BCrypt.HashPassword(req.Senha);
 
             var usuario = _userRepository.FindUser(req.Email);
             var expiration = DateTime.Now;
